@@ -14,7 +14,7 @@ import java.util.List;
 @Profile("dev")
 public class AppController {
 
-    @GetMapping("/list-users")
+    @GetMapping("/list")
     public ResponseEntity<List<String>> listUsers() {
         List<String> list = new ArrayList<>();
         list.add("Jenkins");
