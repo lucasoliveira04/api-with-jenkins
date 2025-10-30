@@ -1,12 +1,12 @@
 pipeline {
     agent any
 
-    triggers {
-        pollSCM('H/5 * * * *')
+    tools {
+        maven 'Maven_3_9_9'
     }
 
     environment {
-        GIT_CREDENTIALS_ID = 'github-credentials' 
+        GIT_CREDENTIALS_ID = 'github-credentials'
         GIT_REPO = 'https://github.com/lucasoliveira04/api-with-jenkins.git'
         BRANCH_SOURCE = 'main'
         BRANCH_TARGET = 'hml'
