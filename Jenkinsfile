@@ -35,18 +35,23 @@ pipeline {
 
         stage('Sync main → hml') {
             steps {
-                script {
+                withCredentials([usernamePassword(
+                    credentialsId: "${GIT_CREDENTIALS_ID}",
+                    usernameVariable: 'GITHUB_USER',
+                    passwordVariable: 'GITHUB_TOKEN'
+                )]) {
                     sh """
                         git config user.name "jenkins"
                         git config user.email "jenkins@localhost"
-                        git fetch origin ${BRANCH_TARGET}
+                        git fetch origin ${BRANCH_TARGET} || git checkout -b ${BRANCH_TARGET}
                         git checkout ${BRANCH_TARGET}
                         git merge origin/${BRANCH_SOURCE} -m "Auto-sync main → hml [Jenkins]"
-                        git push origin ${BRANCH_TARGET}
+                        git push https://${GITHUB_USER}:${GITHUB_TOKEN}@github.com/lucasoliveira04/api-with-jenkins.git ${BRANCH_TARGET}
                     """
                 }
             }
         }
+
     }
 
     post {
