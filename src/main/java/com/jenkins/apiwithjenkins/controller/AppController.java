@@ -19,6 +19,7 @@ public class AppController {
         List<String> list = new ArrayList<>();
         list.add("Jenkins");
         list.add("Jenkins");
+        list.add("Jenkins");
         return ResponseEntity.ok(list);
     }
 }
