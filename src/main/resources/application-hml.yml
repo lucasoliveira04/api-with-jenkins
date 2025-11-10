@@ -1,5 +1,0 @@
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/jenkinsDB_hml
-    username: postgres
-    password: 1234567
