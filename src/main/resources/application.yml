@@ -25,3 +25,18 @@ spring:
 
   cache:
     type: redis
+
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5level [%X{traceId}:%X{spanId}] %X{user} %X{method} %X{route} - %msg%n"
+
+otel:
+  sdk:
+    disabled: false
+  metrics:
+    exporter: none
+  logs:
+    exporter: none
+  traces:
+    exporter: none

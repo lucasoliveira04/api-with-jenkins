@@ -4,6 +4,7 @@ import com.jenkins.apiwithjenkins.dto.UserDto;
 import com.jenkins.apiwithjenkins.entity.Users;
 import com.jenkins.apiwithjenkins.service.IUserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
@@ -22,6 +24,7 @@ public class UserController {
     public ResponseEntity<String> createUser(@RequestBody UserDto userDto) {
         var response = userService.saveUser(userDto);
         try {
+            log.info(response.toString());
             return ResponseEntity.ok("User created with ID: " + response.getId());
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error creating user: " + e.getMessage());
@@ -34,6 +37,7 @@ public class UserController {
             @RequestParam(defaultValue = "10") int size
     ) {
         try {
+            log.info("Getting all users");
             return ResponseEntity.ok(userService.getAllUsers(page, size));
         } catch (Exception e) {
             return ResponseEntity.status(500).build();
@@ -45,6 +49,7 @@ public class UserController {
             @RequestParam List<UUID> userIds
     ) {
         try {
+            log.info("Getting users by IDs: {}", userIds);
             return ResponseEntity.ok(userService.findByUserIds(userIds));
         } catch (Exception e) {
             return ResponseEntity.status(500).build();
