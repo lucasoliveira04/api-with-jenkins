@@ -1,6 +1,7 @@
 package com.jenkins.apiwithjenkins.controller;
 
 import com.jenkins.apiwithjenkins.dto.UserDto;
+import com.jenkins.apiwithjenkins.dto.UserResponse;
 import com.jenkins.apiwithjenkins.entity.Users;
 import com.jenkins.apiwithjenkins.service.IUserService;
 import lombok.RequiredArgsConstructor;
@@ -25,14 +26,14 @@ public class UserController {
         var response = userService.saveUser(userDto);
         try {
             log.info(response.toString());
-            return ResponseEntity.ok("User created with ID: " + response.getId());
+            return ResponseEntity.ok("User created with ID: " + response.id().toString());
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error creating user: " + e.getMessage());
         }
     };
 
     @GetMapping("/all")
-    public ResponseEntity<Page<Users>> getAllUsers(
+    public ResponseEntity<Page<UserResponse>> getAllUsers(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {

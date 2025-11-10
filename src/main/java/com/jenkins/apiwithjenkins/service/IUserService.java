@@ -1,6 +1,7 @@
 package com.jenkins.apiwithjenkins.service;
 
 import com.jenkins.apiwithjenkins.dto.UserDto;
+import com.jenkins.apiwithjenkins.dto.UserResponse;
 import com.jenkins.apiwithjenkins.entity.Users;
 import org.springframework.data.domain.Page;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,10 +12,10 @@ import java.util.UUID;
 public interface IUserService {
 
     @Transactional(readOnly = false)
-    Users saveUser(UserDto userDto);
+    UserResponse saveUser(UserDto userDto);
 
     @Transactional(readOnly = true)
-    Page<Users> getAllUsers(int page, int size);
+    Page<UserResponse> getAllUsers(int page, int size);
 
     @Transactional(readOnly = true)
     Iterable<Users> findByUserIds(List<UUID> userIds);

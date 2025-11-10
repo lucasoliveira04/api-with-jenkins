@@ -19,13 +19,15 @@ public class RedisSyncJob {
     private final UserRepository userRepository;
     private final CacheManager cacheManager;
 
+    /*
     @PostConstruct
     public void init(){
         log.info("Sincronizando Redis com banco na inicialização...");
         syncUsersToRedis();
     }
+    */
 
-    @Scheduled(cron = "0 */1 * * * *")
+    @Scheduled(cron = "0 */5 * * * *")
     public void syncUsersToRedis(){
         List<Users> users = userRepository.findAllWithAddresses();
 
