@@ -1,3 +1,19 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: apiwithjenkins
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+
 spring:
   config:
     import: optional:file:.env[.properties]
@@ -31,6 +47,7 @@ logging:
   pattern:
     console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5level [%X{traceId}:%X{spanId}] %X{user} %X{method} %X{route} - %msg%n"
 
+
 otel:
   sdk:
     disabled: false
@@ -40,3 +57,5 @@ otel:
     exporter: none
   traces:
     exporter: none
+server:
+  port: 8087
