@@ -8,6 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
@@ -32,6 +35,17 @@ public class UserController {
     ) {
         try {
             return ResponseEntity.ok(userService.getAllUsers(page, size));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
+    }
+
+    @GetMapping("/by-ids")
+    public ResponseEntity<Iterable<Users>> getUsersByIds(
+            @RequestParam List<UUID> userIds
+    ) {
+        try {
+            return ResponseEntity.ok(userService.findByUserIds(userIds));
         } catch (Exception e) {
             return ResponseEntity.status(500).build();
         }
