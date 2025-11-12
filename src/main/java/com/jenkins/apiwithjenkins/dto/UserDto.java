@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * DTO for {@link com.jenkins.apiwithjenkins.entity.User}
+ * DTO for {@link com.jenkins.apiwithjenkins.entity.Users}
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record UserDto(
