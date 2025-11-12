@@ -25,7 +25,6 @@ public class UserController {
     public ResponseEntity<String> createUser(@RequestBody UserDto userDto) {
         var response = userService.saveUser(userDto);
         try {
-            log.info(response.toString());
             return ResponseEntity.ok("User created with ID: " + response.id().toString());
         } catch (Exception e) {
             return ResponseEntity.status(500).body("Error creating user: " + e.getMessage());
@@ -38,7 +37,6 @@ public class UserController {
             @RequestParam(defaultValue = "10") int size
     ) {
         try {
-            log.info("Getting all users");
             return ResponseEntity.ok(userService.getAllUsers(page, size));
         } catch (Exception e) {
             return ResponseEntity.status(500).build();
@@ -50,7 +48,6 @@ public class UserController {
             @RequestParam List<UUID> userIds
     ) {
         try {
-            log.info("Getting users by IDs: {}", userIds);
             return ResponseEntity.ok(userService.findByUserIds(userIds));
         } catch (Exception e) {
             return ResponseEntity.status(500).build();
